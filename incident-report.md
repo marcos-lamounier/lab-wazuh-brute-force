@@ -37,11 +37,11 @@ Durante a janela de teste do laboratório, foram executados dois ataques de for�
 
 > Nota: o timestamp dentro do `full_log` está em UTC (18:23), 3h à frente do horário local de Brasília (15:23) — consistente com o fuso configurado na VM alvo.
 
-### Evento 2 — Segundo ataque (wordlist de 100 senhas, ~101 tentativas)
+### Evento 2 — Segundo ataque (wordlist com 102 senhas)
 
 | Campo | Valor |
 |---|---|
-| Hydra iniciado | 15:31:33 |
+| Hydra iniciado | 15:37:21 |
 | Hydra finalizado | 15:37:46 |
 | Login bem-sucedido (full_log, UTC → local) | 18:37:43 → 15:37:43 |
 | Alerta Wazuh gerado | 15:37:44 |
@@ -80,7 +80,7 @@ Durante a janela de teste do laboratório, foram executados dois ataques de for�
 
 ## Análise
 
-O ataque seguiu o padrão clássico de **brute force via SSH** (testes sucessivos de senhas de uma wordlist contra um único usuário): múltiplas tentativas de autenticação com diferentes combinações de usuário/senha em um curto intervalo de tempo, partindo de um único host de origem. No segundo evento, a wordlist continha a senha correta na centésima primeira posição, resultando em login bem-sucedido após 101 tentativas em aproximadamente 6 minutos.
+O ataque seguiu o padrão clássico de **brute force via SSH** (testes sucessivos de senhas de uma wordlist contra um único usuário): múltiplas tentativas de autenticação com diferentes combinações de usuário/senha em um curto intervalo de tempo, partindo de um único host de origem. No segundo evento, a execução do Hydra (102 combinações login/senha, 1 usuário) durou cerca de 25 segundos (15:37:21 a 15:37:46) e encontrou 1 senha válida, o que gerou o login bem-sucedido às 15:37:43. A saída do Hydra está em `evidence/08-hydra-success-redacted.png` (senha ocultada).
 
 O Wazuh não gerou um alerta para cada tentativa individual de senha incorreta — em vez disso, aplicou a lógica de correlação da regra 40112, que identifica o padrão "múltiplas falhas seguidas de um sucesso" no mesmo contexto (mesmo usuário/host) e consolida isso em um único alerta de alta severidade. Esse comportamento reduz ruído em ambientes de produção, mantendo o foco do analista nos eventos que de fato indicam comprometimento.
 

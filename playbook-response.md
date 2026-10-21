@@ -22,7 +22,7 @@ Perguntas a responder antes de agir:
 - [ ] Há outros alertas associados ao mesmo IP de origem em outros hosts (indicando varredura lateral)?
 - [ ] A conta comprometida tem privilégios elevados (sudo, acesso a dados sensíveis)?
 
-**No incidente de referência:** IP de origem 192.168.56.105, usuário `labuser`, 101 tentativas em ~6 minutos, sem confirmação do usuário real — tratado como comprometimento confirmado.
+**No incidente de referência:** IP de origem 192.168.56.105, usuário `labuser`, 102 tentativas em ~25 segundos, sem confirmação do usuário real — tratado como comprometimento confirmado.
 
 ## 3. Contenção
 

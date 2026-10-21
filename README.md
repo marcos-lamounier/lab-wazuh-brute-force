@@ -45,7 +45,7 @@ Este projeto foi construído como parte de um portfólio em Security Operations 
 1. **Setup da infraestrutura**: 3 VMs isoladas em rede host-only, simulando um ambiente corporativo mínimo.
 2. **Instalação do SIEM**: Wazuh all-in-one (Indexer + Manager + Dashboard) no servidor central.
 3. **Deploy do agente**: instalação e registro do Wazuh Agent na máquina alvo, monitorando logs de autenticação (`auth.log` / journald).
-4. **Simulação de ataque**: ataque de força bruta via SSH contra o usuário `labuser`, usando Hydra com uma wordlist de 100 senhas comuns.
+4. **Simulação de ataque**: ataque de força bruta via SSH contra o usuário `labuser`, usando Hydra com uma wordlist de 102 senhas.
 5. **Detecção**: o Wazuh identificou o padrão de múltiplas falhas de autenticação seguidas de um login bem-sucedido, disparando a regra nativa **40112** (nível 12 - severidade alta).
 6. **Análise**: investigação dos eventos no dashboard (Threat Hunting), extração de IOCs (IP de origem, usuário, timestamps).
 7. **Mapeamento MITRE ATT&CK**: o próprio Wazuh classificou o incidente em **T1110 (Brute Force)** e **T1078 (Valid Accounts)**.
@@ -55,14 +55,14 @@ Este projeto foi construído como parte de um portfólio em Security Operations 
 
 - O Wazuh **não gera um alerta por tentativa de senha incorreta** — ele correlaciona o padrão temporal (N falhas seguidas de 1 sucesso) e gera um único alerta consolidado. Isso evita ruído excessivo em ambientes de produção.
 - A regra 40112 já vem mapeada nativamente para múltiplos frameworks de compliance: GDPR, HIPAA, PCI DSS, NIST 800-53 e TSC — útil para contextos onde o SOC precisa justificar controles de auditoria.
-- Um ataque de ~101 tentativas em cerca de 6 minutos (com a senha correta na última posição da wordlist) foi detectado e classificado corretamente sem necessidade de regras customizadas.
+- Um ataque de 102 tentativas em cerca de 25 segundos foi detectado e classificado corretamente sem necessidade de regras customizadas.
 
 ## Arquivos deste repositório
 
 - `README.md` — este arquivo
 - `incident-report.md` — relatório completo do incidente, com linha do tempo e evidências
 - `playbook-response.md` — playbook de resposta a incidentes de brute force SSH
-- `evidence/` — screenshots do dashboard, logs e saída das ferramentas (sem dados sensíveis)
+- `evidence/` — screenshots do dashboard Wazuh, detalhes dos dois eventos (regra 40112) e saída do Hydra (senha ocultada)
 
 ## Como reproduzir
 
