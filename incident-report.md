@@ -17,12 +17,15 @@ Durante a janela de teste do laboratório, foram executados dois ataques de for�
 
 ## Linha do tempo
 
-### Evento 1 — Primeiro ataque (poucas tentativas)
+### Evento 1 — Primeiro ataque (teste curto, ~3 segundos)
+
+> O número exato de falhas anteriores ao sucesso não foi registrado neste teste; a regra 40112 só dispara após múltiplas falhas seguidas de um sucesso.
 
 | Campo | Valor |
 |---|---|
 | Hydra iniciado | 15:23:07 (horário local, UTC-3) |
 | Hydra finalizado | 15:23:10 |
+| Login bem-sucedido (full_log, UTC → local) | 18:23:37 → 15:23:37 |
 | Alerta Wazuh gerado | 15:23:38 |
 | srcip | 192.168.56.105 |
 | srcport | 50276 |
@@ -40,6 +43,7 @@ Durante a janela de teste do laboratório, foram executados dois ataques de for�
 |---|---|
 | Hydra iniciado | 15:31:33 |
 | Hydra finalizado | 15:37:46 |
+| Login bem-sucedido (full_log, UTC → local) | 18:37:43 → 15:37:43 |
 | Alerta Wazuh gerado | 15:37:44 |
 | srcip | 192.168.56.105 |
 | srcport | 37482 |
@@ -76,7 +80,7 @@ Durante a janela de teste do laboratório, foram executados dois ataques de for�
 
 ## Análise
 
-O ataque seguiu o padrão clássico de **credential stuffing / brute force via SSH**: múltiplas tentativas de autenticação com diferentes combinações de usuário/senha em um curto intervalo de tempo, partindo de um único host de origem. No segundo evento, a wordlist continha a senha correta na centésima primeira posição, resultando em login bem-sucedido após 101 tentativas em aproximadamente 6 minutos.
+O ataque seguiu o padrão clássico de **brute force via SSH** (testes sucessivos de senhas de uma wordlist contra um único usuário): múltiplas tentativas de autenticação com diferentes combinações de usuário/senha em um curto intervalo de tempo, partindo de um único host de origem. No segundo evento, a wordlist continha a senha correta na centésima primeira posição, resultando em login bem-sucedido após 101 tentativas em aproximadamente 6 minutos.
 
 O Wazuh não gerou um alerta para cada tentativa individual de senha incorreta — em vez disso, aplicou a lógica de correlação da regra 40112, que identifica o padrão "múltiplas falhas seguidas de um sucesso" no mesmo contexto (mesmo usuário/host) e consolida isso em um único alerta de alta severidade. Esse comportamento reduz ruído em ambientes de produção, mantendo o foco do analista nos eventos que de fato indicam comprometimento.
 
@@ -87,5 +91,5 @@ Por se tratar de ambiente de laboratório isolado, a resposta foi limitada à **
 ## Lições aprendidas
 
 - Senhas fracas (ex.: presentes em wordlists públicas) continuam sendo o vetor de entrada mais simples e mais comum em ataques de força bruta.
-- A regra nativa do Wazuh foi suficiente para detectar o ataque sem necessidade de tuning adicional, mas o tempo entre o sucesso do login (15:37:46) e a geração do alerta (15:37:44) mostra que a detecção ocorre quase em tempo real.
+- A regra nativa do Wazuh foi suficiente para detectar o ataque sem necessidade de tuning adicional, mas o login bem-sucedido ocorreu às 15:37:43 e o alerta foi gerado às 15:37:44, cerca de 1 segundo depois, o que mostra detecção quase em tempo real (o Hydra só encerrou às 15:37:46).
 - Um SOC real precisaria de uma resposta automatizada (bloqueio de IP) para reduzir a janela de exposição após a detecção — ver próximos passos no `README.md`.

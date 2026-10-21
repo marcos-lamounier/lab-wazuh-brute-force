@@ -55,7 +55,7 @@ Este projeto foi construído como parte de um portfólio para candidaturas a vag
 
 - O Wazuh **não gera um alerta por tentativa de senha incorreta** — ele correlaciona o padrão temporal (N falhas seguidas de 1 sucesso) e gera um único alerta consolidado. Isso evita ruído excessivo em ambientes de produção.
 - A regra 40112 já vem mapeada nativamente para múltiplos frameworks de compliance: GDPR, HIPAA, PCI DSS, NIST 800-53 e TSC — útil para contextos onde o SOC precisa justificar controles de auditoria.
-- Mesmo um ataque de ~100 tentativas em menos de 30 segundos foi detectado e classificado corretamente sem necessidade de regras customizadas.
+- Um ataque de ~101 tentativas em cerca de 6 minutos (com a senha correta na última posição da wordlist) foi detectado e classificado corretamente sem necessidade de regras customizadas.
 
 ## Arquivos deste repositório
 
