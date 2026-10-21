@@ -7,7 +7,7 @@ Laboratório prático simulando um ambiente de SOC (Security Operations Center) 
 Demonstrar, de ponta a ponta, o ciclo de vida de um incidente de segurança:
 **Ataque → Detecção (SIEM) → Análise → Resposta → Documentação**
 
-Este projeto foi construído como parte de um portfólio para candidaturas a vagas de entrada (estágio/júnior) em Security Operations Center (SOC).
+Este projeto foi construído como parte de um portfólio em Security Operations Center (SOC).
 
 ## Arquitetura
 
