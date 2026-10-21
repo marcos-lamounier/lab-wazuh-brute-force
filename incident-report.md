@@ -17,9 +17,9 @@ Durante a janela de teste do laboratório, foram executados dois ataques de for�
 
 ## Linha do tempo
 
-### Evento 1 — Primeiro ataque (teste curto, ~3 segundos)
+### Evento 1 — Primeiro ataque (senha correta no início da wordlist, ~3 segundos)
 
-> O número exato de falhas anteriores ao sucesso não foi registrado neste teste; a regra 40112 só dispara após múltiplas falhas seguidas de um sucesso.
+> Neste teste a senha correta estava logo no início da wordlist. O Hydra executa várias conexões em paralelo (até 16 tarefas), então algumas tentativas incorretas ocorreram junto com o sucesso, o suficiente para a regra 40112 (`rule.frequency` 2) disparar. O número exato de falhas não foi registrado.
 
 | Campo | Valor |
 |---|---|
@@ -37,7 +37,7 @@ Durante a janela de teste do laboratório, foram executados dois ataques de for�
 
 > Nota: o timestamp dentro do `full_log` está em UTC (18:23), 3h à frente do horário local de Brasília (15:23) — consistente com o fuso configurado na VM alvo.
 
-### Evento 2 — Segundo ataque (wordlist com 102 senhas)
+### Evento 2 — Segundo ataque (senha correta perto do fim da wordlist, 102 senhas)
 
 | Campo | Valor |
 |---|---|
