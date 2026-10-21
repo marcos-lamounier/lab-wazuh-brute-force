@@ -81,6 +81,10 @@ Este projeto foi construído como parte de um portfólio em Security Operations 
 - [ ] Implementar resposta automatizada (active response do Wazuh para bloqueio de IP)
 - [ ] Análise de vulnerabilidades com OpenVAS/Nessus Essentials
 
+## Autoria e uso de IA
+
+Laboratório montado e executado por mim. Tive apoio de IA para dúvidas de configuração das VMs (alocação de recursos, armazenamento) e para organizar a documentação, que revisei depois.
+
 ---
 
 **Disclaimer:** Este laboratório foi executado inteiramente em ambiente isolado e controlado, de propriedade do autor, para fins exclusivamente educacionais. Nenhum sistema de terceiros foi acessado ou testado.
