@@ -84,6 +84,7 @@ Este projeto foi construído como parte de um portfólio em Security Operations 
 ## Autoria e uso de IA
 
 Laboratório montado e executado por mim. Usei apoio de IA para tirar dúvidas ao longo do projeto.
+
 ---
 
 **Disclaimer:** Este laboratório foi executado inteiramente em ambiente isolado e controlado, de propriedade do autor, para fins exclusivamente educacionais. Nenhum sistema de terceiros foi acessado ou testado.
