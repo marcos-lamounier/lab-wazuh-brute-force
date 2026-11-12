@@ -23,9 +23,8 @@ Durante a janela de teste do laboratório, foram executados dois ataques de for�
 
 | Campo | Valor |
 |---|---|
-| Hydra iniciado | 15:23:07 (horário local, UTC-3) |
-| Hydra finalizado | 15:23:10 |
-| Login bem-sucedido (full_log, UTC → local) | 18:23:37 → 15:23:37 |
+| Hydra (início e fim) | Horário exato não registrado; execução de cerca de 3 segundos, encerrada junto com o login bem-sucedido (estimativa a partir do log do SSH) |
+| Login bem-sucedido (full_log, UTC → local UTC-3) | 18:23:37 → 15:23:37 |
 | Alerta Wazuh gerado | 15:23:38 |
 | srcip | 192.168.56.105 |
 | srcport | 50276 |
